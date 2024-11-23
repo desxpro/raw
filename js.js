@@ -7,11 +7,11 @@ const ostatok = document.querySelector('.ostatok')
 const rand = () => Math.floor(Math.random()* 100 +1) // генерация рандомного число 
 
 let info = {        
-    chisla:[],
-    ostatok: 10,
-    podskazka: 'Podskazka',
-    sekretChislo: rand(),
-    textKnopka: '>>>'
+    chisla:[],   // числа которые будут введены
+    ostatok: 10,  // остаток попыток
+    podskazka: 'Podskazka', // подсказка 
+    sekretChislo: rand(),   // секретное число 
+    textKnopka: '>>>'      // текст на кнопке 
 }
 
 const reset = () =>{        // начать заново игру
@@ -31,9 +31,8 @@ const reset = () =>{        // начать заново игру
     ostatok.textContent = `У вас залишилось ${info.ostatok} спроб`
     knopka.textContent = info.textKnopka
     knopka.addEventListener('click',fun)
-
 }
-const update = (info) =>{
+const update = (info) =>{            // обновляет данные после изменения обьекта 
     podskazka.textContent = info.podskazka
     chisla.textContent = `Вашi числа: ${info.chisla.join(',')}`
     ostatok.textContent = `У вас залишилось ${info.ostatok} спроб`
@@ -41,7 +40,7 @@ const update = (info) =>{
 }
  
 const fun = () =>{
-    if(input.value){
+    if(input.value){       // если число было введенно 
      if(Number(input.value) !== info.sekretChislo && info.ostatok >1){     // если числа не совпадают 
         info.chisla.push(input.value);
         info.ostatok -=1;
@@ -76,11 +75,7 @@ const fun = () =>{
         update(info)
     }
 }
-
-podskazka.textContent = info.podskazka
-chisla.textContent = `Вашi числа: ${info.chisla.join(',')}`
-ostatok.textContent = `У вас залишилось ${info.ostatok} спроб`
-knopka.textContent = info.textKnopka
+update(info)
 knopka.addEventListener('click',fun)
 
 

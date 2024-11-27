@@ -1,6 +1,11 @@
 // создает масив от и до
+// TODO початкове значення параметра step можемо записати
+// у вигляді числа step = start < end ? 1 : -1
 const range = (start, end, step = null) => {
   let m = [];
+  // TODO давай спробуємо відрефакторити цикл. Значення змінної "i" 
+  // будемо збільшувати не на i++, а на step
+  // тобто буде for(let i = start; i <= end; i += step).
   for (let i = start; i <= end; i++) {
     if (step !== null) {
       if (step) i % step ? m.push(i) : null;
@@ -16,6 +21,8 @@ const sum = (array) => array.reduce((a, e) => a + e, 0);
 // масив в список
 const arrayToList = (array) =>
   array.length != 0
+    // TODO Тут все круто. Але мені поки що не зрозуміло навіщо використовуєш || null?
+    // Можливо в ньому немає потреби?
     ? { value: array[0], rest: arrayToList(array.slice(1)) || null }
     : null;
 
@@ -29,6 +36,7 @@ const prepend = (element, list) => ({ value: element, rest: list });
 
 //console.log(prepend(10, arrayToList([20,30,40])));
 
+// TODO давай спробуємо реалізувати функцію nth без використання listToArray
 const nth = (list, index) => listToArray(list)[index];
 
 //console.log(nth(arrayToList([10,20,30]),1))
@@ -93,12 +101,16 @@ const student = [
   { name: "Петро", age: 18, surname: "Петренко" },
 ];
 
+// TODO функція написана правильно,можна попрацювати над назвами змінних
 const byField = (x) => (a, b) => a[x] > b[x] ? 1 : -1;
 
 // console.log(student.sort(byField("age")));
 
 const createLimitedFunction = (fn, limit) => (x) => x <= limit ? fn(x) : null;
 
+// TODO З одним аргументом працює чудово.
+// Давай зробимо так, щоб функція працювала з будь-якою кількістю аргументів
+// Наприклад const limitedFn = createLimitedFunction((name, surname) => console.log(`Hello ${name} ${surname}!`), 2);
 const limitedFn = createLimitedFunction((x) => console.log(2 * x), 2);
 
 // limitedFn(1);
@@ -120,6 +132,8 @@ const createSecret = () => {
 
 // console.log(secret.getSecter());
 
+// TODO можемо трохи поправити функцію і зробити так
+// щоб вона нічого не повертала у випадку multiply(5)(5)
 const multiply = (a) => (b) => !b ? a : multiply(a * b);
 
 console.log(multiply(5)(5)());
